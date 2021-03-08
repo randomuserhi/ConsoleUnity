@@ -170,7 +170,7 @@ public class TMPConsole : MonoBehaviour
 
     private void Update()
     {
-        StandardBuffer.RenderSprite(ConsoleSprite.Get("TestSprite"), new Vector2Int(0, 0));
+        DoubleBuffer.RenderSprite(ConsoleSprite.Get("TestSprite"), new Vector2Int(0, 0));
 
         if ((float)Screen.width / Screen.height > 1.77f)
             CanvasScaler.matchWidthOrHeight = 1;
