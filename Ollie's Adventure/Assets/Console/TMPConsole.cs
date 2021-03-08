@@ -88,8 +88,9 @@ public class TMPConsole : MonoBehaviour
             return Y < 0 || X >= Width || Y < 0 || X >= Height;
         }
 
-        public void RenderSprite(ConsoleSprite Sprite, Vector2Int Position)
+        public void RenderSprite(ConsoleSprite Sprite, Vector2Int Position, bool Centered = true)
         {
+            Position -= new Vector2Int((Sprite.Width + Sprite.Left) / 2, (Sprite.Height + Sprite.Top) / 2);
             for (int i = 0; i < Sprite.Length; i++)
             {
                 for (int j = 0; j < Sprite[i].Length; j++)
@@ -165,12 +166,13 @@ public class TMPConsole : MonoBehaviour
         StandardBuffer = new ConsoleBuffer(120, 32);
         DoubleBuffer = new ConsoleBuffer(240, 64);
 
-        new ConsoleSprite(@"C:\Users\LenovoY720\Documents\Git\ConsoleUnity\Ollie's Adventure\Assets\Sprites\Test.txt", "TestSprite");
+        new ConsoleSprite(@"C:\Users\User\Documents\Git\ConsoleUnity\Ollie's Adventure\Assets\Sprites\Test.txt", "TestSprite");
     }
 
     private void Update()
     {
-        DoubleBuffer.RenderSprite(ConsoleSprite.Get("TestSprite"), new Vector2Int(0, 0));
+        ConsoleSprite S = ConsoleSprite.Get("TestSprite");
+        DoubleBuffer.RenderSprite(S, new Vector2Int(DoubleBuffer.Width / 2, DoubleBuffer.Height / 2));
 
         if ((float)Screen.width / Screen.height > 1.77f)
             CanvasScaler.matchWidthOrHeight = 1;
