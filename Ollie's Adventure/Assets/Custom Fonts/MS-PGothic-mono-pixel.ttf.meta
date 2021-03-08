@@ -3,17 +3,16 @@ guid: 1724d61a452e10f439a5c63fef0f6fda
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
-  fontSize: 16
+  fontSize: 22
   forceTextureCase: -2
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - MS PGothic
-  fallbackFontReferences:
-  - {fileID: 12800000, guid: d196538eba65b82418fce3ebea378e08, type: 3}
+  - MS PGothic Pixel
+  fallbackFontReferences: []
   customCharacters: 
-  fontRenderingMode: 0
+  fontRenderingMode: 2
   ascentCalculationMode: 1
   useLegacyBoundsCalculation: 0
   shouldRoundAdvanceValue: 1

@@ -1,8 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 using System.Text;
+using System.Runtime.CompilerServices;
 
 public static class VectorExtension
 {
@@ -28,6 +30,8 @@ public class TMPConsole : MonoBehaviour
     public GameObject DoubleResObject;
     public GameObject InputObject;
 
+    private Canvas CanvasComponent;
+    private CanvasScaler CanvasScaler;
     private TMP_Text StandardRes;
     private TMP_Text DoubleRes;
     private TMP_InputField Input;
@@ -65,35 +69,62 @@ public class TMPConsole : MonoBehaviour
             }
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private int PosToIndex(Vector2Int Position)
+        {
+            return Position.y * ActualWidth + Position.x;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private bool InvalidPosition(Vector2Int Position)
         {
             return Position.x < 0 || Position.x >= Width || Position.y < 0 || Position.y >= Height;
         }
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private bool InvalidPosition(int Index)
+        {
+            int Y = Index / ActualWidth;
+            int X = Index - ActualWidth * Y;
+            return Y < 0 || X >= Width || Y < 0 || X >= Height;
+        }
 
+        public void RenderSprite(ConsoleSprite Sprite, Vector2Int Position)
+        {
+            for (int i = 0; i < Sprite.Length; i++)
+            {
+                for (int j = 0; j < Sprite[i].Length; j++)
+                {
+                    if (Sprite[i][j] != Sprite.TransparencyColor)
+                        Render(Sprite[i][j], Position + new Vector2Int(j, i));
+                }
+            }
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Render(char Text, Vector2Int Position)
         {
             if (InvalidPosition(Position)) return;
-            Buffer[Position.y * ActualWidth + Position.x] = Text;
+            Buffer[PosToIndex(Position)] = Text;
             Changed = true;
         }
         public void WriteAt(string Text, Vector2Int Position, bool Centered = false)
         {
-            if (InvalidPosition(Position)) return;
-            int RenderIndex = Position.y * ActualWidth + Position.x;
+            int RenderIndex = PosToIndex(Position);
             if (Centered)
                 RenderIndex -= Text.Length / 2;
             for (int i = 0; i < Text.Length; RenderIndex++, i++)
-                Buffer[RenderIndex] = Text[i];
+                if (!InvalidPosition(RenderIndex))
+                    Buffer[RenderIndex] = Text[i];
             Changed = true;
         }
         public void WriteAt(char[] Text, Vector2Int Position, bool Centered = false)
         {
-            if (InvalidPosition(Position)) return;
-            int RenderIndex = Position.y * ActualWidth + Position.x;
+            int RenderIndex = PosToIndex(Position);
             if (Centered)
                 RenderIndex -= Text.Length / 2;
             for (int i = 0; i < Text.Length; RenderIndex++, i++)
-                Buffer[RenderIndex] = Text[i];
+                if (!InvalidPosition(RenderIndex))
+                    Buffer[RenderIndex] = Text[i];
             Changed = true;
         }
 
@@ -103,7 +134,7 @@ public class TMPConsole : MonoBehaviour
             {
                 for (int j = 0; j < Width; j++)
                 {
-                    Buffer[i * ActualWidth + j] = 'a';
+                    Buffer[i * ActualWidth + j] = ' ';
                 }
             }
         }
@@ -122,17 +153,30 @@ public class TMPConsole : MonoBehaviour
 
     private void Start()
     {
+        CanvasComponent = GetComponent<Canvas>();
+        CanvasScaler = GetComponent<CanvasScaler>();
+
         StandardRes = StandardResObject.GetComponent<TMP_Text>();
         DoubleRes = DoubleResObject.GetComponent<TMP_Text>();
         Input = InputObject.GetComponent<TMP_InputField>();
         Input.onFocusSelectAll = false;
+        Input.text = string.Empty;
 
-        StandardBuffer = new ConsoleBuffer(133, 32);
-        DoubleBuffer = new ConsoleBuffer(266, 64);
+        StandardBuffer = new ConsoleBuffer(120, 32);
+        DoubleBuffer = new ConsoleBuffer(240, 64);
+
+        new ConsoleSprite(@"C:\Users\LenovoY720\Documents\Git\ConsoleUnity\Ollie's Adventure\Assets\Sprites\Test.txt", "TestSprite");
     }
 
     private void Update()
     {
+        StandardBuffer.RenderSprite(ConsoleSprite.Get("TestSprite"), new Vector2Int(0, 0));
+
+        if ((float)Screen.width / Screen.height > 1.77f)
+            CanvasScaler.matchWidthOrHeight = 1;
+        else
+            CanvasScaler.matchWidthOrHeight = 0;
+
         if (StandardBuffer.Changed)
         {
             StandardRes.text = StandardBuffer.ToString();
