@@ -86,7 +86,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1888, y: 1080}
+  m_SizeDelta: {x: 1898, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1276663483
 CanvasRenderer:
@@ -116,10 +116,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "33\u200B"
+  m_text: "48\u200B"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 618ee1a3e76240c459d6878cb969f700, type: 2}
-  m_sharedMaterial: {fileID: 6623175558717006595, guid: 618ee1a3e76240c459d6878cb969f700, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 5a61798b3eca31d45b0002b1cfea9d93, type: 2}
+  m_sharedMaterial: {fileID: -7364884461326109318, guid: 5a61798b3eca31d45b0002b1cfea9d93, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -143,8 +143,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 32
-  m_fontSizeBase: 32
+  m_fontSize: 22
+  m_fontSizeBase: 22
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -287,8 +287,8 @@ MonoBehaviour:
   m_HideSoftKeyboard: 0
   m_CharacterValidation: 0
   m_RegexValue: 
-  m_GlobalPointSize: 32
-  m_CharacterLimit: 118
+  m_GlobalPointSize: 22
+  m_CharacterLimit: 172
   m_OnEndEdit:
     m_PersistentCalls:
       m_Calls: []
@@ -316,12 +316,12 @@ MonoBehaviour:
   m_CaretColor: {r: 1, g: 1, b: 1, a: 1}
   m_CustomCaretColor: 1
   m_SelectionColor: {r: 0.9433962, g: 0.9433962, b: 0.9433962, a: 0.7529412}
-  m_Text: 33
+  m_Text: 48
   m_CaretBlinkRate: 1
   m_CaretWidth: 2
   m_ReadOnly: 0
   m_RichText: 1
-  m_GlobalFontAsset: {fileID: 11400000, guid: 618ee1a3e76240c459d6878cb969f700, type: 2}
+  m_GlobalFontAsset: {fileID: 11400000, guid: 5a61798b3eca31d45b0002b1cfea9d93, type: 2}
   m_OnFocusSelectAll: 1
   m_ResetOnDeActivation: 1
   m_RestoreOriginalTextOnEscape: 1
@@ -379,7 +379,7 @@ Canvas:
   m_GameObject: {fileID: 762374801507236995}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 1
+  m_RenderMode: 0
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 1
@@ -774,10 +774,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+  m_text: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 
     2 
-    row length of 120
+    row length of 174
 
     3
 
@@ -839,10 +839,38 @@ MonoBehaviour:
 
     32
 
-'
+    33
+
+    34
+
+    35
+
+    36
+
+    37
+
+    38
+
+    39
+
+    40
+
+    41
+
+    42
+
+    43
+
+    44
+
+    45
+
+    46
+
+    47'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 618ee1a3e76240c459d6878cb969f700, type: 2}
-  m_sharedMaterial: {fileID: 6623175558717006595, guid: 618ee1a3e76240c459d6878cb969f700, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 5a61798b3eca31d45b0002b1cfea9d93, type: 2}
+  m_sharedMaterial: {fileID: -7364884461326109318, guid: 5a61798b3eca31d45b0002b1cfea9d93, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -866,8 +894,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 32
-  m_fontSizeBase: 32
+  m_fontSize: 22
+  m_fontSizeBase: 22
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

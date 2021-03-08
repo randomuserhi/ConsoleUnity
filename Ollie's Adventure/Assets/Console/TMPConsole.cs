@@ -163,16 +163,17 @@ public class TMPConsole : MonoBehaviour
         Input.onFocusSelectAll = false;
         Input.text = string.Empty;
 
-        StandardBuffer = new ConsoleBuffer(120, 32);
+        StandardBuffer = new ConsoleBuffer(174, 47);
         DoubleBuffer = new ConsoleBuffer(240, 64);
 
-        new ConsoleSprite(@"C:\Users\User\Documents\Git\ConsoleUnity\Ollie's Adventure\Assets\Sprites\Test.txt", "TestSprite");
+        new ConsoleSprite(@"C:\Users\LenovoY720\Documents\Git\ConsoleUnity\Ollie's Adventure\Assets\Sprites\Test.txt", "TestSprite");
     }
 
     private void Update()
     {
         ConsoleSprite S = ConsoleSprite.Get("TestSprite");
-        DoubleBuffer.RenderSprite(S, new Vector2Int(DoubleBuffer.Width / 2, DoubleBuffer.Height / 2));
+        StandardBuffer.RenderSprite(S, new Vector2Int(StandardBuffer.Width / 2, StandardBuffer.Height / 2 - S.Height/2));
+        DoubleBuffer.RenderSprite(S, new Vector2Int(DoubleBuffer.Width / 2, DoubleBuffer.Height / 2 + S.Height/2));
 
         if ((float)Screen.width / Screen.height > 1.77f)
             CanvasScaler.matchWidthOrHeight = 1;
