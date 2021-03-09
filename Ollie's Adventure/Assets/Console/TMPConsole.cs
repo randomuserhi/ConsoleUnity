@@ -8,9 +8,43 @@ using System.Runtime.CompilerServices;
 
 public static class VectorExtension
 {
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Vector2Int ToInt2(this Vector2 v)
     {
         return new Vector2Int((int)v.x, (int)v.y);
+    }
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static Vector2Int ToInt2Rounded(this Vector2 v)
+    {
+        return new Vector2Int((int)(v.x + 0.5f), (int)v.y);
+    }
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static Vector2 ToFloat2(this Vector2Int v)
+    {
+        return new Vector2(v.x, v.y);
+    }
+
+    private const float Stand2Double = 11f / 8f;
+    private const float Double2Stand = 8f / 11f;
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static Vector2Int ToStandardResPosition(this Vector2Int Position)
+    {
+        return (Position.ToFloat2() * Double2Stand).ToInt2Rounded();
+    }
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static Vector2Int ToDoubleResPosition(this Vector2Int Position)
+    {
+        return (Position.ToFloat2() * Stand2Double).ToInt2Rounded();
+    }
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static Vector2Int ToStandardResPosition(this Vector2 Position)
+    {
+        return (Position * Double2Stand).ToInt2Rounded();
+    }
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static Vector2Int ToDoubleResPosition(this Vector2 Position)
+    {
+        return (Position * Stand2Double).ToInt2Rounded();
     }
 }
 
@@ -88,15 +122,15 @@ public class TMPConsole : MonoBehaviour
             return Y < 0 || X >= Width || Y < 0 || X >= Height;
         }
 
-        public void RenderSprite(ConsoleSprite Sprite, Vector2Int Position, bool Centered = true)
+        public void RenderSprite(ConsoleSprite Sprite, Vector2Int Position, int Frame = 0, bool Centered = true)
         {
             Position -= new Vector2Int((Sprite.Width + Sprite.Left) / 2, (Sprite.Height + Sprite.Top) / 2);
             for (int i = 0; i < Sprite.Length; i++)
             {
-                for (int j = 0; j < Sprite[i].Length; j++)
+                for (int j = 0; j < Sprite[i, Frame].Length; j++)
                 {
-                    if (Sprite[i][j] != Sprite.TransparencyColor)
-                        Render(Sprite[i][j], Position + new Vector2Int(j, i));
+                    if (Sprite[i, Frame][j] != Sprite.TransparencyColor)
+                        Render(Sprite[i, Frame][j], Position + new Vector2Int(j, i));
                 }
             }
         }
@@ -152,7 +186,7 @@ public class TMPConsole : MonoBehaviour
     public ConsoleBuffer StandardBuffer;
     public ConsoleBuffer DoubleBuffer;
 
-    private void Start()
+    private void Awake()
     {
         CanvasComponent = GetComponent<Canvas>();
         CanvasScaler = GetComponent<CanvasScaler>();
@@ -162,19 +196,25 @@ public class TMPConsole : MonoBehaviour
         Input = InputObject.GetComponent<TMP_InputField>();
         Input.onFocusSelectAll = false;
         Input.text = string.Empty;
+        Input.onSubmit.AddListener(text => 
+        {
+            Debug.Log("Submit");
+            ReadLineSubmission = true;
+            ReadLineResult = text;
+        });
 
         StandardBuffer = new ConsoleBuffer(174, 47);
         DoubleBuffer = new ConsoleBuffer(240, 64);
-
-        new ConsoleSprite(@"C:\Users\LenovoY720\Documents\Git\ConsoleUnity\Ollie's Adventure\Assets\Sprites\Test.txt", "TestSprite");
+        ReadRoutine = ReadLine();
     }
 
-    private void Update()
+    private void OnApplicationQuit()
     {
-        ConsoleSprite S = ConsoleSprite.Get("TestSprite");
-        StandardBuffer.RenderSprite(S, new Vector2Int(StandardBuffer.Width / 2, StandardBuffer.Height / 2 - S.Height/2));
-        DoubleBuffer.RenderSprite(S, new Vector2Int(DoubleBuffer.Width / 2, DoubleBuffer.Height / 2 + S.Height/2));
+        ReadRoutine.Dispose();
+    }
 
+    public void Render()
+    {
         if ((float)Screen.width / Screen.height > 1.77f)
             CanvasScaler.matchWidthOrHeight = 1;
         else
@@ -209,4 +249,20 @@ public class TMPConsole : MonoBehaviour
             case TextResolution.Double: DoubleRes.text = string.Empty; break;
         }
     }
+
+    private IEnumerator<string> ReadLine()
+    {
+        while(true)
+        {
+            if (ReadLineSubmission)
+            {
+                yield return ReadLineResult;
+                ReadLineSubmission = false;
+            }
+            yield return null;
+        }
+    }
+    public IEnumerator<string> ReadRoutine;
+    private bool ReadLineSubmission = false;
+    private string ReadLineResult;
 }

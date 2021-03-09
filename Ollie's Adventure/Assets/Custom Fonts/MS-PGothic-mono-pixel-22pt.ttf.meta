@@ -3,7 +3,7 @@ guid: 6054dbbf525514b40af79eed287ab792
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
-  fontSize: 22
+  fontSize: 16
   forceTextureCase: -2
   characterSpacing: 0
   characterPadding: 1
@@ -12,7 +12,7 @@ TrueTypeFontImporter:
   - MS PGothic Pixel 22
   fallbackFontReferences: []
   customCharacters: 
-  fontRenderingMode: 2
+  fontRenderingMode: 0
   ascentCalculationMode: 1
   useLegacyBoundsCalculation: 0
   shouldRoundAdvanceValue: 1

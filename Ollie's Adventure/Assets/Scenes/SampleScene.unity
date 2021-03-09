@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
   - component: {fileID: 519420030}
+  - component: {fileID: 519420033}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -238,6 +239,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &519420033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90f323921149ce9409d922b213614b90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Console: {fileID: 0}
 --- !u!1 &1285031144
 GameObject:
   m_ObjectHideFlags: 0
@@ -474,6 +488,50 @@ PrefabInstance:
     - target: {fileID: 762374801507236999, guid: 11c9acac410634d46b6e8a1fc47515f3, type: 3}
       propertyPath: m_Pivot.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 762374801797856015, guid: 11c9acac410634d46b6e8a1fc47515f3, type: 3}
+      propertyPath: m_text
+      value: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\n3
+        row length of 240          a\n4\u250C \u2500 \u2510  \u2554\u2550\u2550\u2557\r                            
+        a\n5\u2502 aa\u2502  \u2551aa\u2551\r                             a\n6\u2514
+        \u2500 \u2518  \u255A\u2550\u2550\u255D                 a\n7                           
+        a\n8                            a\n9                            a\n10                          
+        a\n11                           a\n12                           a\n13                          
+        a\n14                           a\n15                           a\n16                          
+        a\n17                           a\n18                           a\n19                          
+        a\n20                           a\n21                           a\n22                          
+        a\n23                           a\n24                           a\n25                          
+        a\n26                           a\n27                           a\n28                          
+        a\n29                           a\n30                           a\n31                          
+        a\n32                           a\n33                           a\n34                          
+        a\n35                           a\n36                           a\n37                          
+        a\n38                           a\n39                           a\n40                          
+        a\n41                           a\n42                           a\n43                          
+        a\n44                           a\n45                           a\n46                          
+        a\n47                           a\n48                           a\n49                          
+        a\n50                           a\n51                           a\n52                          
+        a\n53                           a\n54                           a\n55                          
+        a\n56                           a\n57                           a\n58                          
+        a\n59                           a\n60                           a\n61                          
+        a\n62                           a\n63 x => 12 to match stand\n64 y => 12
+        to match stand"
+      objectReference: {fileID: 0}
+    - target: {fileID: 762374801987043653, guid: 11c9acac410634d46b6e8a1fc47515f3, type: 3}
+      propertyPath: m_text
+      value: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\n3
+        row length of 174  a\n4\u250C \u2500 \u2510  \u2554\u2550\u2550\u2557\r                    
+        a\n5\u2502 aa\u2502  \u2551aa\u2551\r                     a\n6\u2514 \u2500
+        \u2518  \u255A\u2550\u2550\u255D         a\n7                    a\n8                   
+        a\n9                    a\n10                   a\n11                   a\n12                  
+        a\n13                   a\n14                   a\n15                   a\n16                  
+        a\n17                   a\n18                   a\n19                   a\n20                  
+        a\n21                   a\n22                   a\n23                   a\n24                  
+        a\n25                   a\n26                   a\n27                   a\n28                  
+        a\n29                   a\n30                   a\n31                   a\n32                  
+        a\n33                   a\n34                   a\n35                   a\n36                  
+        a\n37                   a\n38                   a\n39                   a\n40                  
+        a\n41                   a\n42                   a\n43                   a\n44                  
+        a\n45                   a\n46 x => 9 to match double\n47 y=> 9 to match double"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 11c9acac410634d46b6e8a1fc47515f3, type: 3}

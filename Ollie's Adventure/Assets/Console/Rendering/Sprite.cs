@@ -18,12 +18,12 @@ public class ConsoleSprite
     public readonly int Width;
     public readonly int Left;
     public readonly int Top;
-    public int Frame = 0;
+    public int FrameCount = 1;
 
     private string[] Characters;
-    public string this[int i]
+    public string this[int i, int Frame]
     {
-        get { return Characters[i + HeaderSize]; }
+        get { if (Frame > FrameCount) Frame = FrameCount - 1; return Characters[Frame * Height + i + HeaderSize]; }
     }
     public static ConsoleSprite Get(string Name)
     {
