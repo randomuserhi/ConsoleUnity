@@ -3,13 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
 
 public class TextEngine : MonoBehaviour
 {
     public static TMPConsole Console;
-    private IEnumerator MainRoutine;
+    private Task MainThread;
+    private CancellationTokenSource MainThreadCancelToken = new CancellationTokenSource();
 
     private void Start()
     {
@@ -18,7 +20,7 @@ public class TextEngine : MonoBehaviour
 
         Loader.LoadAllSprites(); //Load all sprites
 
-        MainRoutine = Game.Start();
+        MainThread = Task.Run(() => { Game.Start(MainThreadCancelToken.Token); });
     }
 
     private void RenderLoop()
@@ -28,13 +30,14 @@ public class TextEngine : MonoBehaviour
 
     private void Update()
     {
-        MainRoutine.MoveNext();
-
         RenderLoop();
         Console.Render();
     }
 
     private void OnApplicationQuit()
     {
+        MainThreadCancelToken.Cancel();
+        MainThreadCancelToken.Dispose();
+        MainThread.Dispose();
     }
 }

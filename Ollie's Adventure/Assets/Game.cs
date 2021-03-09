@@ -4,13 +4,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 using UnityEngine;
 
 public class Game
 {
-    public static IEnumerator Start()
+    private static TMPConsole Console;
+    private static ConsoleScene SceneStandard = new ConsoleScene();
+    private static ConsoleScene SceneDouble = new ConsoleScene();
+
+    public static void Start(CancellationToken Token)
     {
-        do{ TextEngine.Console.ReadRoutine.MoveNext(); yield return null; } while (TextEngine.Console.ReadRoutine.Current == null); //Console ReadLine code
-        Debug.Log(TextEngine.Console.ReadRoutine.Current);
+        Token.ThrowIfCancellationRequested();
+
+        Console = TextEngine.Console;
+        Console.StandardBuffer.Scene = SceneStandard;
+        Console.DoubleBuffer.Scene = SceneDouble;
+
+        /*while (!Token.IsCancellationRequested) //while true loop with cancel functionality
+        {
+            Debug.Log("Bruh");
+        }*/
+
+         
     }
 }

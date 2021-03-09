@@ -72,6 +72,8 @@ public class TMPConsole : MonoBehaviour
 
     public class ConsoleBuffer
     {
+        public ConsoleScene Scene = null;
+
         public bool Changed { get; private set; } = true;
         private char[] Buffer;
         private StringBuilder Builder;
@@ -163,6 +165,12 @@ public class TMPConsole : MonoBehaviour
             Changed = true;
         }
 
+        public void RenderScene()
+        {
+            if (Scene == null) return;
+            Scene.Render(this);
+        }
+
         public void Clear()
         {
             for (int i = 0; i < Height; i++)
@@ -198,19 +206,12 @@ public class TMPConsole : MonoBehaviour
         Input.text = string.Empty;
         Input.onSubmit.AddListener(text => 
         {
-            Debug.Log("Submit");
             ReadLineSubmission = true;
             ReadLineResult = text;
         });
 
         StandardBuffer = new ConsoleBuffer(174, 47);
         DoubleBuffer = new ConsoleBuffer(240, 64);
-        ReadRoutine = ReadLine();
-    }
-
-    private void OnApplicationQuit()
-    {
-        ReadRoutine.Dispose();
     }
 
     public void Render()
@@ -219,6 +220,9 @@ public class TMPConsole : MonoBehaviour
             CanvasScaler.matchWidthOrHeight = 1;
         else
             CanvasScaler.matchWidthOrHeight = 0;
+
+        StandardBuffer.RenderScene();
+        DoubleBuffer.RenderScene();
 
         if (StandardBuffer.Changed)
         {
@@ -250,19 +254,17 @@ public class TMPConsole : MonoBehaviour
         }
     }
 
-    private IEnumerator<string> ReadLine()
+    public string ReadLine()
     {
-        while(true)
+        lock (ReadLock)
         {
-            if (ReadLineSubmission)
-            {
-                yield return ReadLineResult;
-                ReadLineSubmission = false;
-            }
-            yield return null;
+            ReadLineSubmission = false;
+            while (!ReadLineSubmission)
+                continue;
+            return ReadLineResult;
         }
     }
-    public IEnumerator<string> ReadRoutine;
+    private object ReadLock = new object();
     private bool ReadLineSubmission = false;
     private string ReadLineResult;
 }
