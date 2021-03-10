@@ -21,6 +21,8 @@ public class Game
         Console.StandardBuffer.Scene = SceneStandard;
         Console.DoubleBuffer.Scene = SceneDouble;
 
+        SceneStandard.Add(new ConsoleBorder("Beaned lmao", new Vector2(10, 10), Centered:true));
+
         /*while (!Token.IsCancellationRequested) //while true loop with cancel functionality
         {
             Debug.Log("Bruh");

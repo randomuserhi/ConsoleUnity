@@ -144,24 +144,40 @@ public class TMPConsole : MonoBehaviour
             Buffer[PosToIndex(Position)] = Text;
             Changed = true;
         }
-        public void WriteAt(string Text, Vector2Int Position, bool Centered = false)
+        public void WriteAt(string Text, Vector2Int Position, bool Centered = false, bool TransparentWhiteSpace = false)
         {
-            int RenderIndex = PosToIndex(Position);
+            int Origin = PosToIndex(Position);
             if (Centered)
-                RenderIndex -= Text.Length / 2;
-            for (int i = 0; i < Text.Length; RenderIndex++, i++)
-                if (!InvalidPosition(RenderIndex))
+                Origin -= Text.Length / 2;
+            int LineCount = 1;
+            for (int i = 0, RenderIndex = Origin; i < Text.Length; RenderIndex++, i++)
+            {
+                if (Text[i] == '\n')
+                {
+                    RenderIndex = Origin + ActualWidth * LineCount - 1;
+                    LineCount++;
+                }
+                else if (!InvalidPosition(RenderIndex) && (!TransparentWhiteSpace || (TransparentWhiteSpace && Text[i] != ' ')))
                     Buffer[RenderIndex] = Text[i];
+            }
             Changed = true;
         }
-        public void WriteAt(char[] Text, Vector2Int Position, bool Centered = false)
+        public void WriteAt(char[] Text, Vector2Int Position, bool Centered = false, bool TransparentWhiteSpace = false)
         {
-            int RenderIndex = PosToIndex(Position);
+            int Origin = PosToIndex(Position);
             if (Centered)
-                RenderIndex -= Text.Length / 2;
-            for (int i = 0; i < Text.Length; RenderIndex++, i++)
-                if (!InvalidPosition(RenderIndex))
+                Origin -= Text.Length / 2;
+            int LineCount = 1;
+            for (int i = 0, RenderIndex = Origin; i < Text.Length; RenderIndex++, i++)
+            {
+                if (Text[i] == '\n')
+                {
+                    RenderIndex = Origin + ActualWidth * LineCount - 1;
+                    LineCount++;
+                }
+                else if (!InvalidPosition(RenderIndex) && (!TransparentWhiteSpace || (TransparentWhiteSpace && Text[i] != ' ')))
                     Buffer[RenderIndex] = Text[i];
+            }
             Changed = true;
         }
 

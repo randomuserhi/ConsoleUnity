@@ -38,7 +38,6 @@ public class ConsoleScene
             return;
         }
         Objects.Add(SortLayer, Object);
-        Debug.Log(Objects.Count);
     }
 
     public void Clear()
