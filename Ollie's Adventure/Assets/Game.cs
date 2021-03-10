@@ -21,13 +21,13 @@ public class Game
         Console.StandardBuffer.Scene = SceneStandard;
         Console.DoubleBuffer.Scene = SceneDouble;
 
-        SceneStandard.Add(new ConsoleBorder("Beaned lmao", new Vector2(10, 10), Centered:true));
+        SceneStandard.Add(new ConsoleRender(ConsoleSprite.Get("TestSprite"), new Vector2(Console.StandardBuffer.Width / 2, Console.StandardBuffer.Height / 2)));
 
         /*while (!Token.IsCancellationRequested) //while true loop with cancel functionality
         {
             Debug.Log("Bruh");
         }*/
 
-         
+        Debug.Log(Console.ReadLine());
     }
 }
