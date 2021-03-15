@@ -21,13 +21,11 @@ public class Game
         Console.StandardBuffer.Scene = SceneStandard;
         Console.DoubleBuffer.Scene = SceneDouble;
 
-        SceneStandard.Add(new ConsoleRender(ConsoleSprite.Get("TestSprite"), new Vector2(Console.StandardBuffer.Width / 2, Console.StandardBuffer.Height / 2)));
+        SceneDouble.Add(new ConsoleRender(ConsoleSprite.Get("Cat_Sleeping"), new Vector2(Console.StandardBuffer.Width / 2, Console.StandardBuffer.Height / 2), Animated:true));
 
         /*while (!Token.IsCancellationRequested) //while true loop with cancel functionality
         {
             Debug.Log("Bruh");
         }*/
-
-        Debug.Log(Console.ReadLine());
     }
 }

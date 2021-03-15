@@ -13,6 +13,7 @@ public abstract class ConsoleSceneObject
         this.Position = Position;
     }
     public abstract void Render(TMPConsole.ConsoleBuffer Buffer);
+    public virtual void Update() { }
 }
 
 public class ConsoleScene
@@ -38,6 +39,14 @@ public class ConsoleScene
             return;
         }
         Objects.Add(SortLayer, Object);
+    }
+
+    public void Update()
+    {
+        for (int i = 0; i < Objects.Count; i++)
+        {
+            Objects.Values[i].Update();
+        }
     }
 
     public void Clear()

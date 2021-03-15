@@ -8,7 +8,7 @@ using UnityEngine;
 
 public class ConsoleSprite
 {
-    private const int HeaderSize = 5;
+    private const int HeaderSize = 7;
 
     public static Dictionary<string, int> SpriteDict = new Dictionary<string, int>();
     public static List<ConsoleSprite> SpriteAtlas = new List<ConsoleSprite>();
@@ -19,6 +19,7 @@ public class ConsoleSprite
     public readonly int Left;
     public readonly int Top;
     public int FrameCount = 1;
+    public float FrameDelay = 0;
 
     private string[] Characters;
     public string this[int i, int Frame]
@@ -41,6 +42,8 @@ public class ConsoleSprite
         Left = int.Parse(Characters[2]);
         Top = int.Parse(Characters[3]);
         TransparencyColor = Characters[4][0];
+        FrameCount = int.Parse(Characters[5]);
+        FrameDelay = int.Parse(Characters[6]) / 1000f;
 
         if (SpriteName != string.Empty)
             SpriteDict.Add(SpriteName, SpriteAtlas.Count);

@@ -127,7 +127,7 @@ public class TMPConsole : MonoBehaviour
         public void RenderSprite(ConsoleSprite Sprite, Vector2Int Position, int Frame = 0, bool Centered = true)
         {
             Position -= new Vector2Int((Sprite.Width + Sprite.Left) / 2, (Sprite.Height + Sprite.Top) / 2);
-            for (int i = 0; i < Sprite.Length; i++)
+            for (int i = 0; i < Sprite.Height; i++)
             {
                 for (int j = 0; j < Sprite[i, Frame].Length; j++)
                 {
@@ -237,6 +237,9 @@ public class TMPConsole : MonoBehaviour
         else
             CanvasScaler.matchWidthOrHeight = 0;
 
+        StandardBuffer.Scene?.Update();
+        DoubleBuffer.Scene?.Update();
+
         StandardBuffer.RenderScene();
         DoubleBuffer.RenderScene();
 
@@ -272,15 +275,11 @@ public class TMPConsole : MonoBehaviour
 
     public string ReadLine()
     {
-        lock (ReadLock)
-        {
-            ReadLineSubmission = false;
-            while (!ReadLineSubmission)
-                continue;
-            return ReadLineResult;
-        }
+        ReadLineSubmission = false;
+        while (!ReadLineSubmission)
+            continue;
+        return ReadLineResult;
     }
-    private object ReadLock = new object();
     private bool ReadLineSubmission = false;
     private string ReadLineResult;
 }

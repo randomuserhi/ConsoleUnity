@@ -38,7 +38,5 @@ public class TextEngine : MonoBehaviour
     {
         MainThreadCancelToken.Cancel();
         MainThreadCancelToken.Dispose();
-        if (MainThread != null)
-            MainThread.Dispose();
     }
 }
